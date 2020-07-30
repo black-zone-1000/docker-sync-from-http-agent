@@ -19,6 +19,10 @@ do
 	mkdir ${TARGET_FOLDER}
 
 	lftp -f "
+		set net:timeout 5;
+		set net:max-retries 3;
+		set net:reconnect-interval-multiplier 1;
+		set net:reconnect-interval-base 5;
 		open $_HOST
 		set ftp:list-options -a
 		mirror -c -e $_SOURCEFOLDER $_TARGETFOLDER
